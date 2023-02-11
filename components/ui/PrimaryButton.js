@@ -1,6 +1,6 @@
 import { View, Text, Pressable, StyleSheet } from "react-native";
 
-import Colors from "../constants/colors";
+import Colors from "../../constants/colors";
 
 //* If we want to style a buttons as we like, we need to create our own custom buttons (in react-native)
 //* A default Button component don't accept a style prop
