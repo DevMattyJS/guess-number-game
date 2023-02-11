@@ -1,5 +1,7 @@
 import { View, Text, Pressable, StyleSheet } from "react-native";
 
+//* If we want to style a buttons as we like, we need to create our own custom buttons (in react-native)
+//* A default Button component don't accept a style prop
 function PrimaryButton(props) {
   return (
     <View style={styles.buttonOuterContainer}>

@@ -3,7 +3,7 @@ import { TextInput, View, StyleSheet, Alert } from "react-native";
 
 import PrimaryButton from "../components/PrimaryButton";
 
-function StartGameScreen() {
+function StartGameScreen(props) {
   const [enteredNumber, setEnteredNumber] = useState("");
 
   function numberInputHandler(enteredText) {
@@ -18,6 +18,7 @@ function StartGameScreen() {
     // Convert the entered string into a number (a value from 'TextInput' component is always a string)
     const chosenNumber = parseInt(enteredNumber);
 
+    // Some basic validation of an input (it has to be a number between 1 and 99)
     if (isNaN(chosenNumber) || chosenNumber <= 0 || chosenNumber > 99) {
       Alert.alert(
         "Invalid input!",
@@ -28,7 +29,7 @@ function StartGameScreen() {
       return;
     }
 
-    console.log("Valid input!");
+    props.onPickNumber(chosenNumber);
   }
 
   return (
