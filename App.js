@@ -5,6 +5,8 @@ import { useState } from "react";
 import StartGameScreen from "./screens/StartGameScreen";
 import GameScreen from "./screens/GameScreen";
 
+import Colors from "./constants/colors";
+
 export default function App() {
   //* Keeps track of the state if a user picked number already or not
   const [userNumber, setUserNumber] = useState(null);
@@ -21,7 +23,10 @@ export default function App() {
   }
 
   return (
-    <LinearGradient style={styles.rootScreen} colors={["#4e0329", "#ddb52f"]}>
+    <LinearGradient
+      style={styles.rootScreen}
+      colors={[Colors.primary700, Colors.accent500]}
+    >
       <ImageBackground
         source={require("./assets/images/background.png")}
         resizeMode="cover"

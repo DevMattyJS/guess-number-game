@@ -1,5 +1,7 @@
 import { View, Text, Pressable, StyleSheet } from "react-native";
 
+import Colors from "../constants/colors";
+
 //* If we want to style a buttons as we like, we need to create our own custom buttons (in react-native)
 //* A default Button component don't accept a style prop
 function PrimaryButton(props) {
@@ -13,7 +15,7 @@ function PrimaryButton(props) {
             : styles.buttonInnerContainer
         }
         onPress={props.onPress}
-        android_ripple={{ color: "#640233" }}
+        android_ripple={{ color: Colors.primary600 }}
       >
         <Text style={styles.buttonText}>{props.children}</Text>
       </Pressable>
@@ -30,7 +32,7 @@ const styles = StyleSheet.create({
     overflow: "hidden",
   },
   buttonInnerContainer: {
-    backgroundColor: "#72063c",
+    backgroundColor: Colors.primary500,
     paddingVertical: 8,
     paddingHorizontal: 16,
     elevation: 2,
