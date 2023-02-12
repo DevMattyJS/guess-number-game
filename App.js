@@ -1,5 +1,7 @@
 import { StyleSheet, ImageBackground, SafeAreaView } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
+import { useFonts } from "expo-font";
+import AppLoading from "expo-app-loading";
 
 import { useState } from "react";
 import StartGameScreen from "./screens/StartGameScreen";
@@ -12,6 +14,18 @@ export default function App() {
   //* Keeps track of the state if a user picked number already or not
   const [userNumber, setUserNumber] = useState(null);
   const [gameIsOver, setGameIsOver] = useState(false);
+
+  //* Loads our downloaded fonts under our chosen property names
+  //* returns an array, where a first item is a boolean which tells if the fonts was completely loaded yet
+  const [fontsLoaded] = useFonts({
+    "open-sans": require("./assets/fonts/OpenSans-Regular.ttf"),
+    "open-sans-bold": require("./assets/fonts/OpenSans-Bold.ttf"),
+  });
+
+  //* Show a splash screen (loading) if the fonts were not yet fully loaded
+  if (!fontsLoaded) {
+    return <AppLoading />;
+  }
 
   function pickedNumberHandler(pickedNumber) {
     setUserNumber(pickedNumber);
