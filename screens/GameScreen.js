@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { View, StyleSheet, Alert } from "react-native";
+import { View, StyleSheet, Alert, Text, FlatList } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 
 import Title from "../components/ui/Title";
@@ -7,6 +7,7 @@ import NumberContainer from "../components/game/NumberContainer";
 import PrimaryButton from "../components/ui/PrimaryButton";
 import Card from "../components/ui/Card";
 import InstructionText from "../components/ui/InstructionText";
+import GuessLogItem from "../components/game/GuessLogItem";
 
 //* Creates a random number between min and max values,
 //* 'exclude' parameter will be used in a way, that computer will not be able to guess correct number on a first attempt
@@ -26,14 +27,20 @@ let maxBoundary = 100;
 function GameScreen(props) {
   const initialGuess = generateRandomBetween(1, 100, props.userNumber);
   const [currentGuess, setCurrentGuess] = useState(initialGuess);
+  const [guessRounds, setGuessRounds] = useState([]);
 
   //* Check if the currentGuess is a correct number (picked by a user), whenever a guess is changed (generated a new one)
   //* end the game if the number is correct
   useEffect(() => {
     if (currentGuess === props.userNumber) {
-      props.onGameOver();
+      props.onGameOver(guessRounds.length);
     }
   }, [currentGuess, props.userNumber, props.onGameOver]);
+
+  useEffect(() => {
+    minBoundary = 1;
+    maxBoundary = 100;
+  }, []);
 
   //* Guess a new number if a guess is not correct
   function nextGuessHandler(direction) {
@@ -61,7 +68,10 @@ function GameScreen(props) {
       currentGuess
     );
     setCurrentGuess(newRndNumber);
+    setGuessRounds((prevGuessRounds) => [newRndNumber, ...prevGuessRounds]);
   }
+
+  const guessRoundListLength = guessRounds.length;
 
   return (
     <View style={styles.screen}>
@@ -84,7 +94,18 @@ function GameScreen(props) {
           </View>
         </View>
       </Card>
-      {/* <View>LOG ROUNDS</View> */}
+      <View style={styles.listContainer}>
+        <FlatList
+          data={guessRounds}
+          renderItem={(itemData) => (
+            <GuessLogItem
+              guess={itemData.item}
+              roundNumber={guessRoundListLength - itemData.index}
+            />
+          )}
+          keyExtractor={(item) => item}
+        />
+      </View>
     </View>
   );
 }
@@ -104,5 +125,9 @@ const styles = StyleSheet.create({
   },
   buttonContainer: {
     flex: 1,
+  },
+  listContainer: {
+    flex: 1,
+    padding: 16,
   },
 });
