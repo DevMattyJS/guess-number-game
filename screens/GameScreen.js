@@ -27,7 +27,7 @@ let maxBoundary = 100;
 function GameScreen(props) {
   const initialGuess = generateRandomBetween(1, 100, props.userNumber);
   const [currentGuess, setCurrentGuess] = useState(initialGuess);
-  const [guessRounds, setGuessRounds] = useState([]);
+  const [guessRounds, setGuessRounds] = useState([initialGuess]);
 
   //* Check if the currentGuess is a correct number (picked by a user), whenever a guess is changed (generated a new one)
   //* end the game if the number is correct
@@ -99,8 +99,8 @@ function GameScreen(props) {
           data={guessRounds}
           renderItem={(itemData) => (
             <GuessLogItem
-              guess={itemData.item}
               roundNumber={guessRoundListLength - itemData.index}
+              guess={itemData.item}
             />
           )}
           keyExtractor={(item) => item}
