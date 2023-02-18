@@ -1,4 +1,4 @@
-import { Text, StyleSheet } from "react-native";
+import { Text, StyleSheet, Platform } from "react-native";
 
 import Colors from "../../constants/colors";
 
@@ -16,6 +16,8 @@ const styles = StyleSheet.create({
     textAlign: "center",
     padding: 12,
     width: 300,
+    // We can create a platform specific code by using a Platform API (check official docs for more info)
+    borderWidth: Platform.select({ ios: 2, android: 0 }),
     // with the regular width we can also set up a minWidth / maxWidth (or minHeight / maxHeight),
     // so our app will be more responsive for different screen sizes
     maxWidth: "80%",
