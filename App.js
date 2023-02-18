@@ -13,6 +13,7 @@ import Colors from "./constants/colors";
 export default function App() {
   //* Keeps track of the state if a user picked number already or not
   const [userNumber, setUserNumber] = useState(null);
+
   const [gameIsOver, setGameIsOver] = useState(true);
   const [guessRounds, setGuessRounds] = useState(0);
 

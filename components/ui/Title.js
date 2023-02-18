@@ -15,5 +15,9 @@ const styles = StyleSheet.create({
     color: Colors.accent500,
     textAlign: "center",
     padding: 12,
+    width: 300,
+    // with the regular width we can also set up a minWidth / maxWidth (or minHeight / maxHeight),
+    // so our app will be more responsive for different screen sizes
+    maxWidth: "80%",
   },
 });
